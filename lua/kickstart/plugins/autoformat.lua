@@ -7,9 +7,9 @@ return {
   'neovim/nvim-lspconfig',
   config = function()
     -- Switch for controlling whether you want autoformatting.
-    --  Use :KickstartFormatToggle to toggle autoformatting on or off
+    --  Use :FormatToggle to toggle autoformatting on or off
     local format_is_enabled = true
-    vim.api.nvim_create_user_command('KickstartFormatToggle', function()
+    vim.api.nvim_create_user_command('FormatToggle', function()
       format_is_enabled = not format_is_enabled
       print('Setting autoformatting to: ' .. tostring(format_is_enabled))
     end, {})
@@ -32,7 +32,7 @@ return {
     --
     -- See `:help LspAttach` for more information about this autocmd event.
     vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('kickstart-lsp-attach-format', { clear = true }),
+      group = vim.api.nvim_create_augroup('lsp-attach-format', { clear = true }),
       -- This is where we attach the autoformatting for reasonable clients
       callback = function(args)
         local client_id = args.data.client_id
@@ -55,8 +55,13 @@ return {
         vim.api.nvim_create_autocmd('BufWritePre', {
           group = get_augroup(client),
           buffer = bufnr,
-          callback = function()
+          callback = function(opts)
             if not format_is_enabled then
+              return
+            end
+
+            if vim.bo[opts.buf].filetype == 'python' then
+              -- Skip python since we let black handle it under
               return
             end
 
@@ -69,6 +74,26 @@ return {
           end,
         })
       end,
+    })
+
+    -- Use black for formathing python
+    vim.api.nvim_create_autocmd("FileType", {
+      desc = 'Format python on write using black',
+      pattern = 'python',
+      group = vim.api.nvim_create_augroup('black_on_save', { clear = true }),
+      callback = function(opts)
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          buffer = opts.buf,
+          callback = function()
+            -- Save the curret view
+            local cur_view = vim.fn.winsaveview()
+            -- Format buffer with black
+            vim.api.nvim_command('silent %!black - -q')
+            -- Restore the view after formating
+            vim.fn.winrestview(cur_view)
+          end
+        })
+      end
     })
   end,
 }
