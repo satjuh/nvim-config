@@ -97,6 +97,11 @@ require('lazy').setup({
 
       -- Set the highlight colors correctly
       vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#415e44" });
+      vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#8f3c3f" });
+      vim.api.nvim_set_hl(0, "DiffviewStatusDeleted", { bg = "#8f3c3f" });
+      vim.api.nvim_set_hl(0, "DiffviewDiffChange", { bg = "#3f473c" });
+      vim.api.nvim_set_hl(0, "DiffviewDiffText", { bg = "#415e44" });
+      vim.api.nvim_set_hl(0, "DiffviewDiffAddAsDelete", { bg = "#53222b" });
     end,
 
     enabled = function()
@@ -109,7 +114,7 @@ require('lazy').setup({
     },
 
     keys = {
-      { "<leader>gd", "<cmd> DiffviewOpen <CR>",        desc = "Open diffview" },
+      { "<leader>gd", "<cmd> DiffviewOpen <CR>",        desc = "Open diffview this s" },
       { "<leader>gc", "<cmd> DiffviewClose <CR>",       desc = "Close diff view" },
       { "<leader>gh", "<cmd> DiffviewFileHistory <CR>", desc = "Open file history view" },
     }
@@ -344,6 +349,12 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
+-- Configure the spell checker for English
+vim.opt.spelllang = 'en_gb'
+vim.opt.spell = true
+
+-- Change the fill character for diff
+vim.opt.fillchars:append("diff: ")
 
 -- Set highlight on search
 vim.o.hlsearch = true
@@ -501,7 +512,8 @@ end
 
 local function telescope_find_all()
   require('telescope.builtin').find_files {
-    no_ignore = true
+    no_ignore = true,
+    hidden = true,
   }
 end
 
