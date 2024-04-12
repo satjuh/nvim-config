@@ -57,8 +57,8 @@ require('lazy').setup({
           width = 30
         }
       })
-      vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>", { silent = true })
-      vim.keymap.set('n', '<leader>e', ":NvimTreeOpen<CR>", { silent = true })
+      vim.keymap.set('n', '<leader>e', ":NvimTreeToggle<CR>", { silent = true })
+      -- vim.keymap.set('n', '<leader>e', ":NvimTreeOpen<CR>", { silent = true })
     end,
   },
 
@@ -410,6 +410,10 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-- Easily move to next and previous quick fix list item
+vim.keymap.set({ 'n', 'v' }, '<C-n>', "<cmd>cnext<CR>zz")
+vim.keymap.set({ 'n', 'v' }, '<C-p>', "<cmd>cprev<CR>zz")
+
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -634,7 +638,7 @@ local on_attach = function(_, bufnr)
   --nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gi', require('telescope.builtin').lsp_implementations, 'Goto implementation')
-  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+  nmap('<leader>d', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('<leader>fs', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
