@@ -22,8 +22,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Vim keybindins
 vim.keymap.set('i', "<C-l>", "<Right>")
--- Doesn't work because that's how stuff worsk
--- vim.keymap.set('i', "<C-h>", "<Left>")
+vim.keymap.set('i', "<C-h>", "<Left>")
 
 -- [[ Configure plugins ]]
 -- NOTE: Here is where you install your plugins.
@@ -46,6 +45,35 @@ require('lazy').setup({
     'towolf/vim-helm',
     ft = 'helm',
   },
+
+  -- Harpoon
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local harpoon = require("harpoon")
+      harpoon.setup({})
+
+      -- vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Add harpooon mark" })
+      vim.keymap.set("n", "<leader>ms", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+        { desc = "Show harpoon quick menu" })
+      vim.keymap.set("n", "<a-u>", function() harpoon:list():select(1) end,
+        { desc = "Harpoon mark 1" })
+      vim.keymap.set("n", "<a-i>", function() harpoon:list():select(2) end,
+        { desc = "Harpoon mark 2" })
+      vim.keymap.set("n", "<a-o>", function() harpoon:list():select(3) end,
+        { desc = "Harpoon mark 3" })
+      vim.keymap.set("n", "<a-p>", function() harpoon:list():select(4) end,
+        { desc = "Harpoon mark 4" })
+
+      -- Toggle previous & next buffers stored within Harpoon list
+      vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+      vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+    end
+  },
+
 
 
   -- A side bar where to see files etc...
@@ -294,6 +322,7 @@ require('lazy').setup({
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
       -- Only load if `make` is available. Make sure you have the system
       -- requirements installed.
+      "debugloop/telescope-undo.nvim",
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         -- NOTE: If you are having trouble with this installation,
@@ -459,7 +488,7 @@ require('telescope').setup {
 }
 
 -- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'fzf', 'undo')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -534,6 +563,9 @@ vim.keymap.set('n', '<leader>fw', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>fW', ':LiveGrepGitRoot<cr>', { desc = '[F]ind by grep on Git Root [W]' })
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[F]ind [R]esume' })
+
+-- Telescope undo tree bindings
+vim.keymap.set('n', '<leader>fu', "<cmd> Telescope undo <cr>", { desc = '[F]ind undo tree' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -702,7 +734,7 @@ local servers = {
   pyright = {},
   marksman = {},
   bashls = {},
-  nil_ls = {},
+  -- nil_ls = {},
   helm_ls = {},
   rust_analyzer = {},
   tsserver = {},
