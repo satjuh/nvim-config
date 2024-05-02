@@ -59,14 +59,16 @@ require('lazy').setup({
       vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Add harpooon mark" })
       vim.keymap.set("n", "<leader>ms", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
         { desc = "Show harpoon quick menu" })
-      vim.keymap.set("n", "<a-u>", function() harpoon:list():select(1) end,
+      vim.keymap.set("n", "<a-n>", function() harpoon:list():select(1) end,
         { desc = "Harpoon mark 1" })
-      vim.keymap.set("n", "<a-i>", function() harpoon:list():select(2) end,
+      vim.keymap.set("n", "<a-m>", function() harpoon:list():select(2) end,
         { desc = "Harpoon mark 2" })
-      vim.keymap.set("n", "<a-o>", function() harpoon:list():select(3) end,
+      vim.keymap.set("n", "<a-,>", function() harpoon:list():select(3) end,
         { desc = "Harpoon mark 3" })
-      vim.keymap.set("n", "<a-p>", function() harpoon:list():select(4) end,
+      vim.keymap.set("n", "<a-.>", function() harpoon:list():select(4) end,
         { desc = "Harpoon mark 4" })
+      vim.keymap.set("n", "<a-->", function() harpoon:list():select(5) end,
+        { desc = "Harpoon mark 5" })
 
       -- Toggle previous & next buffers stored within Harpoon list
       vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
