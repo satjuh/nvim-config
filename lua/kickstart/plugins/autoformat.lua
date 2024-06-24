@@ -76,7 +76,7 @@ return {
       end,
     })
 
-    -- Use black for formathing python
+    -- Use black for formating python
     vim.api.nvim_create_autocmd("FileType", {
       desc = 'Format python on write using black',
       pattern = 'python',
@@ -88,7 +88,7 @@ return {
             -- Save the curret view
             local cur_view = vim.fn.winsaveview()
             -- Format buffer with black
-            vim.api.nvim_command('silent %!black - -q')
+            vim.api.nvim_command('silent %!black - --quiet 2>/dev/null')
             -- Restore the view after formating
             vim.fn.winrestview(cur_view)
           end
