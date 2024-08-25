@@ -286,7 +286,7 @@ vim.keymap.set('n', '<leader>fu', "<cmd> Telescope undo <cr>", { desc = '[F]ind 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'go' },
 
     -- autotags for html and jsx
     autotag = {
@@ -443,13 +443,14 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   clangd = {},
-  -- gopls = {},
   pyright = {},
   marksman = {},
   bashls = {},
   -- nil_ls = {},
   helm_ls = {},
   rust_analyzer = {},
+  golangci_lint_ls = {},
+  gopls = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
