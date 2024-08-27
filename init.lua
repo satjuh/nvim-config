@@ -84,6 +84,7 @@ require('lazy').setup({
 -- Configure the spell checker for English
 vim.opt.spelllang = 'en_gb'
 vim.opt.spell = true
+vim.opt.spelloptions = "camel"
 
 -- Change the fill character for diff
 vim.opt.fillchars:append("diff: ")
@@ -449,8 +450,9 @@ local servers = {
   -- nil_ls = {},
   helm_ls = {},
   rust_analyzer = {},
-  golangci_lint_ls = {},
-  gopls = {},
+  typos_lsp = {},
+  -- golangci_lint_ls = {},
+  -- gopls = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
