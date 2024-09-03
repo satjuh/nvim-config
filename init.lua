@@ -241,14 +241,14 @@ end
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = 'Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = 'Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     previewer = true,
   })
-end, { desc = '[/] Fuzzily search in current buffer' })
+end, { desc = 'Fuzzily search in current buffer' })
 
 local function telescope_live_grep_open_files()
   require('telescope.builtin').live_grep {
@@ -265,18 +265,18 @@ local function telescope_find_all()
 end
 
 
-vim.keymap.set('n', '<leader>fo', telescope_live_grep_open_files, { desc = '[F]ind [/] in Open Files' })
+vim.keymap.set('n', '<leader>fo', telescope_live_grep_open_files, { desc = 'Find in Open Files' })
 -- vim.keymap.set('n', '<leader>fs', require('telescope.builtin').builtin, { desc = '[F]ind [S]elect Telescope' })
 vim.keymap.set('n', '<leader>fa', telescope_find_all, { desc = 'Find all' })
 vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = 'Find buffers' })
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = '[F]ind Git [F]iles' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
-vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp' })
-vim.keymap.set('n', '<leader>fo', require('telescope.builtin').grep_string, { desc = '[F]ind current w[O]rd' })
-vim.keymap.set('n', '<leader>fw', require('telescope.builtin').live_grep, { desc = '[F]ind by grep [w]' })
-vim.keymap.set('n', '<leader>fW', ':LiveGrepGitRoot<cr>', { desc = '[F]ind by grep on Git Root [W]' })
-vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
-vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[F]ind [R]esume' })
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Find Git Files' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find Files' })
+vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Find Help' })
+vim.keymap.set('n', '<leader>fo', require('telescope.builtin').grep_string, { desc = 'Find current word' })
+vim.keymap.set('n', '<leader>fw', require('telescope.builtin').live_grep, { desc = 'Find by grep w' })
+vim.keymap.set('n', '<leader>fW', ':LiveGrepGitRoot<cr>', { desc = 'Find by grep on Git Root' })
+vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = 'Find Diagnostics' })
+vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = 'Find Resume' })
 
 -- Telescope undo tree bindings
 vim.keymap.set('n', '<leader>fu', "<cmd> Telescope undo <cr>", { desc = '[F]ind undo tree' })
@@ -382,11 +382,11 @@ local on_attach = function(_, bufnr)
   nmap('gd', vim.lsp.buf.definition, 'Goto definition')
   -- nmap('gi', vim.lsp.buf.implementation, 'Goto implementation')
   --nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gr', require('telescope.builtin').lsp_references, 'Goto references')
   nmap('gi', require('telescope.builtin').lsp_implementations, 'Goto implementation')
-  nmap('<leader>d', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('<leader>fs', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('<leader>d', require('telescope.builtin').lsp_type_definitions, 'Type Definition')
+  nmap('<leader>fs', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
+  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
   -- See `:help K` for why this keymap
   nmap('<C-h>', vim.lsp.buf.hover, 'Hover Documentation')
@@ -398,12 +398,12 @@ local on_attach = function(_, bufnr)
   })
 
   -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, 'Workspace Add Folder')
+  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Workspace Remove Folder')
   nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  end, 'Workspace List Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -411,23 +411,22 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = 'Diagnostics', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-}
--- register which-key VISUAL mode
--- required for visual <leader>hs (hunk stage) to work
-require('which-key').register({
-  ['<leader>'] = { name = 'VISUAL <leader>' },
-  ['<leader>h'] = { 'Git [H]unk' },
-}, { mode = 'v' })
+require('which-key').add({
+  { '<leader>c', group = 'Code' },
+  { '<leader>d', group = 'Diagnostics' },
+  { '<leader>g', group = 'Git' },
+  { '<leader>h', group = 'Git Hunk' },
+  { '<leader>r', group = 'Rename' },
+  { '<leader>f', group = 'Find' },
+  { '<leader>t', group = 'Toggle' },
+  { '<leader>w', group = 'Workspace' },
+  {
+    -- register which-key VISUAL mode
+    -- required for visual <leader>hs (hunk stage) to work
+    mode = { 'v' },
+    { '<leader>', name = 'VISUAL <leader>' }
+  }
+})
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
@@ -450,6 +449,7 @@ local servers = {
   -- nil_ls = {},
   helm_ls = {},
   rust_analyzer = {},
+  regols = {},
   typos_lsp = {},
   -- golangci_lint_ls = {},
   -- gopls = {},

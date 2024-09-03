@@ -28,8 +28,9 @@ return {
 	},
 
 	keys = {
-		{ "<leader>gd", "<cmd> DiffviewOpen <CR>",        desc = "Open diffview this s" },
+		{ "<leader>gd", "<cmd> DiffviewOpen <CR>",        desc = "Open diffview working tree head" },
 		{ "<leader>gc", "<cmd> DiffviewClose <CR>",       desc = "Close diff view" },
 		{ "<leader>gh", "<cmd> DiffviewFileHistory <CR>", desc = "Open file history view" },
+		{ "<leader>gm", "<cmd> DiffviewOpen master <CR>", desc = "Open diff view against master" },
 	}
 }
