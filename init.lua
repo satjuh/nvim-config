@@ -447,6 +447,7 @@ local servers = {
   marksman = {},
   bashls = {},
   -- nil_ls = {},
+  ruff = {},
   helm_ls = {},
   rust_analyzer = {},
   regols = {},
