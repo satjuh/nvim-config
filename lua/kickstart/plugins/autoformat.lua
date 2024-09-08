@@ -60,10 +60,10 @@ return {
               return
             end
 
-            if vim.bo[opts.buf].filetype == 'python' then
-              -- Skip python since we let black handle it under
-              return
-            end
+            -- if vim.bo[opts.buf].filetype == 'python' then
+            --   -- Skip python since we let black handle it under
+            --   return
+            -- end
 
             vim.lsp.buf.format {
               async = false,
@@ -76,24 +76,24 @@ return {
       end,
     })
 
-    -- Use black for formathing python
-    vim.api.nvim_create_autocmd("FileType", {
-      desc = 'Format python on write using black',
-      pattern = 'python',
-      group = vim.api.nvim_create_augroup('black_on_save', { clear = true }),
-      callback = function(opts)
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          buffer = opts.buf,
-          callback = function()
-            -- Save the curret view
-            local cur_view = vim.fn.winsaveview()
-            -- Format buffer with black
-            vim.api.nvim_command('silent %!black - -q')
-            -- Restore the view after formating
-            vim.fn.winrestview(cur_view)
-          end
-        })
-      end
-    })
+    -- Use black for formating python
+    -- vim.api.nvim_create_autocmd("FileType", {
+    --   desc = 'Format python on write using black',
+    --   pattern = 'python',
+    --   group = vim.api.nvim_create_augroup('black_on_save', { clear = true }),
+    --   callback = function(opts)
+    --     vim.api.nvim_create_autocmd('BufWritePre', {
+    --       buffer = opts.buf,
+    --       callback = function()
+    --         -- Save the curret view
+    --         local cur_view = vim.fn.winsaveview()
+    --         -- Format buffer with black
+    --         vim.api.nvim_command('silent %!black - --quiet 2>/dev/null')
+    --         -- Restore the view after formating
+    --         vim.fn.winrestview(cur_view)
+    --       end
+    --     })
+    --   end
+    -- })
   end,
 }
