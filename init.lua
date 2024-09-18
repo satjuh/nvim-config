@@ -47,8 +47,6 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   'numToStr/Comment.nvim',
-
-
   require 'plugins.tmux',
   require 'plugins.dracula',
   require 'plugins.nvim_tree',
@@ -63,10 +61,13 @@ require('lazy').setup({
   require 'plugins.autopair',
   require 'plugins.nvim_surround',
   require 'plugins.treesitter',
+  require 'plugins.ts-autotag',
+  require 'plugins.conform',
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.autoformat',
+  -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -289,10 +290,6 @@ vim.defer_fn(function()
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'go' },
 
-    -- autotags for html and jsx
-    autotag = {
-      enable = true
-    },
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
     -- Install languages synchronously (only applied to `ensure_installed`)
@@ -454,7 +451,7 @@ local servers = {
   typos_lsp = {},
   -- golangci_lint_ls = {},
   -- gopls = {},
-  tsserver = {},
+  -- tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
