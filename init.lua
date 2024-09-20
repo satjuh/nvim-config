@@ -63,6 +63,7 @@ require('lazy').setup({
   require 'plugins.treesitter',
   require 'plugins.ts-autotag',
   require 'plugins.conform',
+  require 'plugins.preview-markdown',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
