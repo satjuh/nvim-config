@@ -148,6 +148,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('i', "<C-l>", "<Right>")
 vim.keymap.set('i', "<C-h>", "<Left>")
 
+vim.keymap.set('v', '<leader>bd', 'c<c-r>=system("base64 --decode --wrap=0", @")<cr><esc>')
+vim.keymap.set('v', '<leader>be', 'c<c-r>=system("base64 --wrap=0", @")<cr><esc>')
+
 -- Recenter after moving
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = "Center cursor after moving down half-page" })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = "Center cursor after moving up half-page" })
@@ -451,7 +454,7 @@ local servers = {
   regols = {},
   typos_lsp = {},
   -- golangci_lint_ls = {},
-  -- gopls = {},
+  gopls = {},
   -- tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
