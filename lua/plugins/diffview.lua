@@ -31,6 +31,7 @@ return {
 		{ "<leader>gd", "<cmd> DiffviewOpen <CR>",                  desc = "Open diffview working tree head" },
 		{ "<leader>gc", "<cmd> DiffviewClose <CR>",                 desc = "Close diff view" },
 		{ "<leader>gh", "<cmd> DiffviewFileHistory <CR>",           desc = "Open file history view" },
+		{ "<leader>gf", "<cmd> DiffviewFileHistory % <CR>",         desc = "Open file history view" },
 		{ "<leader>gm", "<cmd> DiffviewOpen origin/master... <CR>", desc = "Open diff view against master" },
 	}
 }
