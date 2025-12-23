@@ -20,7 +20,7 @@ vim.o.relativenumber = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
+-- NOTE You can change these options as you wish!
 -- Configure the spell checker for English
 vim.opt.spelllang = 'en_gb'
 vim.opt.spell = true
@@ -139,12 +139,6 @@ vim.keymap.set('n', '<leader>dl', function()
   vim.diagnostic.setqflist { open = true }
 end, { desc = 'Open diagnostics list' })
 
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
-
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -190,25 +184,24 @@ require('lazy').setup({
     },
   },
 
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-
-  require 'plugins.which-key',
-  require 'plugins.ts-autotag',
-  require 'plugins.lsp-config',
-  require 'plugins.gitsigns',
-  require 'plugins.conform',
-  require 'plugins.telescope',
-  require 'plugins.mini',
-  require 'plugins.blink-cmp',
-  require 'plugins.treesitter',
-  require 'plugins.dracula',
   require 'plugins.autosession',
-  require 'plugins.tmux',
-  require 'plugins.autopair',
-  require 'plugins.nvim_tree',
+  require 'plugins.blink-cmp',
+  require 'plugins.conform',
   require 'plugins.diffview',
+  require 'plugins.dracula',
+  require 'plugins.gitsigns',
+  require 'plugins.grapple',
   require 'plugins.helm',
+  require 'plugins.lsp-config',
+  require 'plugins.mini',
+  require 'plugins.neogen',
+  require 'plugins.nvim_tree',
+  require 'plugins.telescope',
+  require 'plugins.tmux',
+  require 'plugins.todo-comments',
+  require 'plugins.treesitter',
+  require 'plugins.ts-autotag',
+  require 'plugins.which-key',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

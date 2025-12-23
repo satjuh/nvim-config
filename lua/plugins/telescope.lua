@@ -11,7 +11,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
       build = 'make',
 
       -- `cond` is a condition used to determine whether this plugin should be
-      -- installed and loaded.
+      -- installed and loaded.tes
       cond = function()
         return vim.fn.executable 'make' == 1
       end,
@@ -43,15 +43,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
+    local actions = require 'telescope.actions'
     require('telescope').setup {
       -- You can put your default mappings / updates / etc. in here
       --  All the info you're looking for is in `:help telescope.setup()`
       --
-      -- defaults = {
-      --   mappings = {
-      --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-      --   },
-      -- },
+      defaults = {
+        mappings = {
+          i = { ['<TAB>'] = actions.move_selection_next, ['<S-TAB>'] = actions.move_selection_previous },
+        },
+      },
       -- pickers = {}
       extensions = {
         ['ui-select'] = {
@@ -73,6 +74,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
+    local todo = require('telescope').extensions['todo-comments']
+
+    -- local nvim_lsp = require 'nvim_lsp'
+    -- root_dir = nvim_lsp.util.root_pattern '.git'
 
     vim.keymap.set('n', '<leader>fa', telescope_find_all, { desc = 'Find all' })
     vim.keymap.set('n', '<leader>fo', builtin.grep_string, { desc = 'Find current word' })
@@ -84,12 +89,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'Find by grep w' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find Diagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
+    vim.keymap.set('n', '<leader>ft', require 'pickers.filetype-picker', { desc = 'Set filetype' })
+    vim.keymap.set('n', '<leader>fc', '<cmd> TodoTelescope <CR>', { desc = 'Find comments of TODO FIXME NOTE etc..' })
 
-    -- vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-
+    -- vim.api.nvim_set_keymap('n', '<leader>td', ':lua telescope.todo_comments({ cwd = root_dir })<CR>', { noremap = true, silent = true })
     -- Shortcut for searching your Neovim configuration files
     -- vim.keymap.set('n', '<leader>sn', function()
     --   builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    -- end, { desc = '[S]earch [N]eovim files' })
+    -- end, { desc = 'Search Neovim files' })
   end,
 }
+
+-- vim: ts=2 sts=2 sw=2 sw=2 et
