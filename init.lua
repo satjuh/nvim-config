@@ -90,7 +90,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.o.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.o.cursorline = true
+vim.o.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
@@ -122,6 +122,14 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Center cursor after moving dow
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Center cursor after moving up half-page' })
 vim.keymap.set('n', '<C-o>', '<C-o>zz', { desc = 'Center cursor after jumping to previous point' })
 vim.keymap.set('n', '<C-i>', '<C-i>zz', { desc = 'Center cursor after jumping to next point' })
+
+-- Encode and decode to and from b64 for kubernetes configs
+vim.keymap.set('v', '<leader>bd', 'c<c-r>=system("base64 --decode --wrap=0", @")<cr><esc>')
+vim.keymap.set('v', '<leader>be', 'c<c-r>=system("base64 --wrap=0", @")<cr><esc>')
+
+-- Set file type to json or yaml as those are used quite often
+vim.keymap.set('n', '<leader>tj', ':set filetype=json<cr>')
+vim.keymap.set('n', '<leader>ty', ':set filetype=yaml<cr>')
 
 -- Easily move to next and previous quick fix list item
 vim.keymap.set({ 'n', 'v' }, '<C-n>', '<cmd>cnext<CR>zz')
@@ -170,7 +178,8 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  -- 'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
