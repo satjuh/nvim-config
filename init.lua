@@ -63,7 +63,8 @@ require('lazy').setup({
   require 'plugins.treesitter',
   require 'plugins.ts-autotag',
   require 'plugins.conform',
-  require 'plugins.preview-markdown',
+  -- BROKEN ??
+  -- require 'plugins.preview-markdown',
   require 'plugins.neogen',
   require 'plugins.grapple',
 
@@ -464,6 +465,13 @@ local servers = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {
+          'vim',
+          'require'
+        },
+      },
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
     },
