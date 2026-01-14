@@ -213,6 +213,7 @@ return {
       gopls = {},
       -- tsserver = {},
       html = { filetypes = { 'html', 'twig', 'hbs' } },
+      yamlls = {},
       jq = {},
       yq = {},
       prettier = {},

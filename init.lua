@@ -211,6 +211,7 @@ require('lazy').setup({
   require 'plugins.treesitter',
   require 'plugins.ts-autotag',
   require 'plugins.which-key',
+  require 'plugins.indent-blank',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
