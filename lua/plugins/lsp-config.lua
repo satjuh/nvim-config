@@ -62,10 +62,6 @@ return {
         --  Most Language Servers support renaming across files, etc.
         map('<leader>rn', vim.lsp.buf.rename, 'Rename')
 
-        -- Execute a code action, usually your cursor needs to be on top of an error
-        -- or a suggestion from your LSP for this to activate.
-        map('ca', vim.lsp.buf.code_action, 'Code action', { 'n', 'x' })
-
         -- Find references for the word under your cursor.
         map('gr', require('telescope.builtin').lsp_references, 'Goto References')
 
@@ -154,7 +150,7 @@ return {
     })
 
     -- Diagnostic Config
-    -- See :help vim.diagnostic.Opts
+    -- See :help vim.diagnotic.Opts
     vim.diagnostic.config {
       severity_sort = true,
       float = { border = 'rounded', source = 'if_many' },
@@ -213,7 +209,7 @@ return {
       gopls = {},
       -- tsserver = {},
       html = { filetypes = { 'html', 'twig', 'hbs' } },
-      yamlls = {},
+      -- yamlls = {},
       jq = {},
       yq = {},
       prettier = {},

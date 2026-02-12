@@ -192,6 +192,10 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'terrastruct/d2-vim',
+    ft = { 'd2' },
+  },
 
   require 'plugins.autosession',
   require 'plugins.blink-cmp',
