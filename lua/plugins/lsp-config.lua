@@ -62,6 +62,10 @@ return {
         --  Most Language Servers support renaming across files, etc.
         map('<leader>rn', vim.lsp.buf.rename, 'Rename')
 
+        -- Execute a code action, usually your cursor needs to be on top of an error
+        -- or a suggestion from your LSP for this to activate.
+        map('<leader>ca', vim.lsp.buf.code_action, 'Code action', { 'n', 'x' })
+
         -- Find references for the word under your cursor.
         map('gr', require('telescope.builtin').lsp_references, 'Goto References')
 
