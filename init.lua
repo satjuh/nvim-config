@@ -212,7 +212,7 @@ require('lazy').setup({
   require 'plugins.telescope',
   require 'plugins.tmux',
   require 'plugins.todo-comments',
-  require 'plugins.treesitter',
+  require 'plugins.arborist',
   require 'plugins.ts-autotag',
   require 'plugins.which-key',
   require 'plugins.indent-blank',
